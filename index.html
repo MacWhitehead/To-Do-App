@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>To Do App</title>
 </head>
 
@@ -13,13 +14,13 @@
     <div class="all-tasks">
         <h2 class="task-list-title">My Lists</h2>
         <ul class="task-list">
-            <li class="active-list">Brain dump</li>
-            <li>Work</li>
-            <li>Grocery</li>
+            <li class="list-name active-list">Brain dump</li>
+            <li class="list-name">Work</li>
+            <li class="list-name">Grocery</li>
         </ul>
         <form action="">
-            <input placeholder="new list name" class="new list" type="text" aria-label="new list name" />
-            <button class="btn list" aria-label="create new list"></button>
+            <input type="text" placeholder="new list name" class="new list" aria-label="new list name" />
+            <button class="btn create" aria-label="create new list"></button>
         </form>
     </div>
     <div class="todo-list">
@@ -51,11 +52,18 @@
         </div>
         <div class="new-task-creator">
             <form action="">
-                <input placeholder="new task name" class="new list" type="text" aria-label="new task name" />
-                <button class="btn task" aria-label="create new list"></button>
+                <input placeholder="new task name" class="new task" type="text" aria-label="new task name" />
+                <button class="btn create" aria-label="create new list"></button>
             </form>
         </div>
-        <div class="delete-task"></div>
+        <div class="delete-task">
+            <button class="btn delete">
+                Clear Completed Tasks
+            </button>
+            <button class="btn delete">
+                Delete List
+            </button>
+        </div>
     </div>
 </body>
 
