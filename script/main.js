@@ -1,6 +1,6 @@
-const listContainer = document.querySelector("[data-lists]")
-const newListForm = document.querySelector('[data-new-list-form]')
-const newListInput = document.querySelector('[data-new-list-input]')
+const listContainer = document.querySelector('[data-lists]');
+const newListForm = document.querySelector('[data-new-list-form]');
+const newListInput = document.querySelector('[data-new-list-input]');
 const deleteListButton = document.querySelector('[data-delete-list-button]');
 const listDisplayContainer = document.querySelector('[data-list-display-container]')
 const listTitleElement = document.querySelector('[data-list-title]')
@@ -11,9 +11,9 @@ const newTaskForm = document.querySelector("[data-new-task-form");
 const newTaskInput = document.querySelector("[data-new-task-input");
 const clearCompleteTasksButton = document.querySelector("[data-clear-complete-tasks-button]")
 
-const LOCAL_STORAGE_LIST_KEY = 'tasks.lists';
-const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'tasks.selectedListId';
 
+const LOCAL_STORAGE_LIST_KEY = 'task.lists';
+const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId';
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
 let selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
 
@@ -27,8 +27,7 @@ listContainer.addEventListener('click', e => {
 tasksContainer.addEventListener('click', e => {
     if(e.target.tagName.toLowerCase() === 'input') {
         const selectedList = lists.find(list => list.id === selectedListId);
-        const selectedTask = selectedList.tasks.find(task => task.id === 
-            e.target.id)
+        const selectedTask = selectedList.tasks.find(task => task.id === e.target.id)
         selectedTask.complete = e.target.checked;
         save();
         renderTaskCount(selectedList);
@@ -42,7 +41,7 @@ clearCompleteTasksButton.addEventListener('click', e => {
 })
 
 deleteListButton.addEventListener('click', e => {
-    lists = lists.filter(lists => list.id !== selectedListId)
+    lists = lists.filter(list => list.id !== selectedListId)
     selectedListId = null;
     saveAndRender();
 })
@@ -50,24 +49,22 @@ deleteListButton.addEventListener('click', e => {
 newListForm.addEventListener('submit', e => {
     e.preventDefault();
     const listName = newListInput.value
-    if (listName == null || listName === '') {
+    if (listName == null || listName === '') return 
         const list = createList(listName)
         newListInput.value = null;
         lists.push(list);
         saveAndRender();
-    }
 })
 
 newTaskForm.addEventListener('submit', e => {
     e.preventDefault();
     const taskName = newTaskInput.value
-    if (taskName == null || taskName === '') {
+    if (taskName == null || taskName === '') return
         const task = createTask(taskName)
         newTaskInput.value = null;
         const selectedList = lists.find(list => list.id === selectedListId);
         selectedList.tasks.push(task);
         saveAndRender();
-    }
 })
 
 function createList(name) {
@@ -90,7 +87,7 @@ function saveAndRender() {
 }
 
 function render() {
-    clearElement(listContainer);
+    clearElement(listsContainer);
     renderLists();
 
     const selectedList = lists.find(list => list.id === selectedListId);
@@ -122,12 +119,11 @@ function renderTasks(selectedList) {
 function renderTaskCount(selectedList) {
     const incompleteTaskCount = selectedList.tasks.filter(task => !task.complete).length
     const taskString = incompleteTaskCount === 1 ? 'task' : 'tasks'
-    listCountElement.innerText = `${incompleteTaskCount} ${taskString} 
-    remaining`
+    listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`
 }
 
 function renderLists() {
-    listContainer.forEach(list => {
+    lists.forEach(list => {
         const listElement = document.createElement('li');
         listElement.dataset.listId = list.id;
         listElement.classList.add('list-name');
@@ -142,6 +138,6 @@ function clearElement(element) {
     while (element.firstChild) {
       element.removeChild(element.firstChild)
     }
-  };
+  }
   
-saveAndRender();
+render();

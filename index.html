@@ -17,7 +17,6 @@
     <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-    <script defer src="/script/main.js"></script>
     <title>To Do App</title>
 </head>
 
@@ -26,46 +25,47 @@
         <div class="d-flex justify-content-center border">
             <h1 class="title">To Do</h1>
         </div>
-    </div>
-    <div class="row border">
-        <div class="all-tasks">
-            <h2 class="task-list-title">My Lists</h2>
-            <ul class="task-list" data-lists></ul>
-            <form action="" data-new-list-form>
-                <input type="text" class="new list" data-new-list-input placeholder="new list name"
-                    aria-label="new list name" />
-                <button class="btn create" aria-label="create new list">+</button>
-            </form>
-        </div>
-    </div>
-    <div class="row border">
-        <div class="todo-list" data-list-display-container>
-            <div class="todo-header">
-                <h2 class="list-title" data-list-title></h2>
-                <p class="task-count" data-list-count></p>
+        <div class="row d-flex justify-content-center border">
+            <div class="col border">
+                <div class="all-tasks">
+                    <h2 class="task-list-title">My Lists</h2>
+                    <ul class="task-list" data-lists></ul>
+                    <form action="" data-new-list-form>
+                        <input type="text" class="new list" data-new-list-input placeholder="new list name"
+                            aria-label="new list name" />
+                        <button class="btn create" aria-label="create new list">+</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col border">
+                <div class="todo-list" data-list-display-container>
+                    <div class="todo-header">
+                        <h2 class="list-title" data-list-title></h2>
+                        <p class="task-count" data-list-count></p>
+                    </div>
+                    <div class="todo-body">
+                        <div class="tasks" data-tasks></div>
+                        <div class="new-task-creator">
+                            <form action="" data-new-task-form>
+                                <input type="text" data-new-task-input class="new task" placeholder="new task name"
+                                    aria-label="new task name" />
+                                <button class="btn create" aria-label="create new list">+</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="delete-task">
+                        <button class="btn delete" data-clear-complete-tasks-button>
+                            Clear Completed Tasks
+                        </button>
+                        <button class="btn delete" data-delete-list-button>
+                            Delete List
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="todo-body">
-            <div class="tasks" data-tasks></div>
-            <div class="new-task-creator">
-                <form action="" data-new-task-form>
-                    <input type="text" data-new-task-input class="new task" placeholder="new task name"
-                        aria-label="new task name" />
-                    <button class="btn create" aria-label="create new list">+</button>
-                </form>
-            </div>
-        </div>
-        <div class="delete-task">
-            <button class="btn delete" data-clear-complete-tasks-button>
-                Clear Completed Tasks
-            </button>
-            <button class="btn delete" data-delete-list-button>
-                Delete List
-            </button>
-        </div>
-    </div>
-    </div>
 
+    </div>
     <template id="task-template">
         <div class="task">
             <input type="checkbox">
@@ -74,5 +74,5 @@
         </div>
     </template>
 </body>
-
+<script src="/script/main.js"></script>
 </html>
