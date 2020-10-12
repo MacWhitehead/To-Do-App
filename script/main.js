@@ -1,3 +1,5 @@
+// creates variables for all the necessary sections and uses
+// the data class to access them in the HTML
 const listContainer = document.querySelector('[data-lists]');
 const newListForm = document.querySelector('[data-new-list-form]');
 const newListInput = document.querySelector('[data-new-list-input]');
@@ -7,8 +9,8 @@ const listTitleElement = document.querySelector('[data-list-title]')
 const listCountElement = document.querySelector('[data-list-count]')
 const tasksContainer = document.querySelector('[data-tasks]')
 const taskTemplate = document.getElementById("task-template")
-const newTaskForm = document.querySelector("[data-new-task-form");
-const newTaskInput = document.querySelector("[data-new-task-input");
+const newTaskForm = document.querySelector("[data-new-task-form]");
+const newTaskInput = document.querySelector("[data-new-task-input]");
 const clearCompleteTasksButton = document.querySelector("[data-clear-complete-tasks-button]")
 
 
@@ -25,7 +27,7 @@ listContainer.addEventListener('click', e => {
 })
 
 tasksContainer.addEventListener('click', e => {
-    if(e.target.tagName.toLowerCase() === 'input') {
+    if (e.target.tagName.toLowerCase() === 'input') {
         const selectedList = lists.find(list => list.id === selectedListId);
         const selectedTask = selectedList.tasks.find(task => task.id === e.target.id)
         selectedTask.complete = e.target.checked;
@@ -49,22 +51,24 @@ deleteListButton.addEventListener('click', e => {
 newListForm.addEventListener('submit', e => {
     e.preventDefault();
     const listName = newListInput.value
-    if (listName == null || listName === '') return 
-        const list = createList(listName)
-        newListInput.value = null;
-        lists.push(list);
-        saveAndRender();
+    if (listName == null || listName === '') return
+    const list = createList(listName)
+    newListInput.value = null;
+    lists.push(list);
+    saveAndRender();
 })
 
 newTaskForm.addEventListener('submit', e => {
     e.preventDefault();
     const taskName = newTaskInput.value
     if (taskName == null || taskName === '') return
-        const task = createTask(taskName)
-        newTaskInput.value = null;
-        const selectedList = lists.find(list => list.id === selectedListId);
-        selectedList.tasks.push(task);
-        saveAndRender();
+    const task = createTask(taskName)
+    newTaskInput.value = null;
+    const selectedList = lists.find(list => list.id === selectedListId);
+    console.log(selectedList);
+    console.log(lists)
+    selectedList.tasks.push(task);
+    saveAndRender();
 })
 
 function createList(name) {
@@ -87,12 +91,12 @@ function saveAndRender() {
 }
 
 function render() {
-    clearElement(listsContainer);
+    clearElement(listContainer);
     renderLists();
 
     const selectedList = lists.find(list => list.id === selectedListId);
 
-    if(selectedListId == null) {
+    if (selectedListId == null) {
         listDisplayContainer.style.display = 'none';
     } else {
         listDisplayContainer.style.display = '';
@@ -101,7 +105,7 @@ function render() {
         clearElement(tasksContainer);
         renderTasks(selectedList)
     }
-};
+}
 
 function renderTasks(selectedList) {
     selectedList.tasks.forEach(task => {
@@ -124,20 +128,19 @@ function renderTaskCount(selectedList) {
 
 function renderLists() {
     lists.forEach(list => {
-        const listElement = document.createElement('li');
-        listElement.dataset.listId = list.id;
-        listElement.classList.add('list-name');
+        const listElement = document.createElement('li')
+        listElement.dataset.listId = list.id
+        listElement.classList.add('list-name')
         listElement.innerText = list.name;
         if (list.id === selectedListId) {
             listElement.classList.add('active.list')
         }
-        listContainer.appendChild(listElement);
+        listContainer.appendChild(listElement)
+    })
 }
 
 function clearElement(element) {
     while (element.firstChild) {
-      element.removeChild(element.firstChild)
+        element.removeChild(element.firstChild)
     }
-  }
-  
-render();
+}
