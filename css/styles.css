@@ -25,6 +25,12 @@ body {
   margin: 10px;
 }
 
+.header {
+  background-color: var(--color-black);
+  color: white;
+  margin: 0.2px;
+}
+
 .my-lists {
   background-color: var(--color-light-orange);
 }
@@ -45,11 +51,6 @@ body {
   opacity: 0.7;
   transition: opacity 250ms ease-in;
   cursor: pointer;
-}
-
-.header {
-  background-color: var(--color-black);
-  color: white;
 }
 
 .task-list {
