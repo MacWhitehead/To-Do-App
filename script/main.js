@@ -19,6 +19,7 @@ const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId';
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
 let selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
 
+//goes to the list you clicked
 listContainer.addEventListener('click', e => {
     if (e.target.tagName.toLowerCase() === 'li') {
         selectedListId = e.target.dataset.listId;
@@ -26,6 +27,7 @@ listContainer.addEventListener('click', e => {
     }
 })
 
+//checks the list item off and sets to completed
 tasksContainer.addEventListener('click', e => {
     if (e.target.tagName.toLowerCase() === 'input') {
         const selectedList = lists.find(list => list.id === selectedListId);
@@ -36,13 +38,13 @@ tasksContainer.addEventListener('click', e => {
     }
 })
 
-clearCompleteTasksButton.addEventListener('click', e => {
+clearCompleteTasksButton.addEventListener('click', () => {
     const selectedList = lists.find(list => list.id === selectedListId);
     selectedList.tasks = selectedList.tasks.filter(task => !task.complete);
     saveAndRender()
 })
 
-deleteListButton.addEventListener('click', e => {
+deleteListButton.addEventListener('click', () => {
     lists = lists.filter(list => list.id !== selectedListId)
     selectedListId = null;
     saveAndRender();
@@ -51,7 +53,9 @@ deleteListButton.addEventListener('click', e => {
 newListForm.addEventListener('submit', e => {
     e.preventDefault();
     const listName = newListInput.value
-    if (listName == null || listName === '') return
+    if (listName == null || listName === '') {
+        return
+    }
     const list = createList(listName)
     newListInput.value = null;
     lists.push(list);
@@ -61,7 +65,9 @@ newListForm.addEventListener('submit', e => {
 newTaskForm.addEventListener('submit', e => {
     e.preventDefault();
     const taskName = newTaskInput.value
-    if (taskName == null || taskName === '') return
+    if (taskName == null || taskName === '') {
+        return
+    }
     const task = createTask(taskName)
     newTaskInput.value = null;
     const selectedList = lists.find(list => list.id === selectedListId);
@@ -77,7 +83,6 @@ function createList(name) {
 
 function createTask(name) {
     return { id: Date.now().toString(), name: name, complete: false };
-
 }
 
 function save() {
@@ -139,8 +144,20 @@ function renderLists() {
     })
 }
 
+//clears completed tasks
 function clearElement(element) {
     while (element.firstChild) {
         element.removeChild(element.firstChild)
     }
 }
+
+// function changeTheme(themeId) {
+//     var link = document.querySelector("[theme]");
+//     link.href = `css/theme-${themeId}.css`;
+//     console.log(link.href);
+// }
+// changeTheme(1);
+render();
+
+
+//add delete task button
