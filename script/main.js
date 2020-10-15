@@ -12,7 +12,8 @@ const taskTemplate = document.getElementById("task-template")
 const newTaskForm = document.querySelector("[data-new-task-form]");
 const newTaskInput = document.querySelector("[data-new-task-input]");
 const clearCompleteTasksButton = document.querySelector("[data-clear-complete-tasks-button]")
-
+const deleteTaskButton = document.querySelector("[data-delete-task]")
+const editTaskButton = document.querySelector("[data-edit-task]")
 
 const LOCAL_STORAGE_LIST_KEY = 'task.lists';
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId';
@@ -38,6 +39,7 @@ tasksContainer.addEventListener('click', e => {
     }
 })
 
+
 clearCompleteTasksButton.addEventListener('click', () => {
     const selectedList = lists.find(list => list.id === selectedListId);
     selectedList.tasks = selectedList.tasks.filter(task => !task.complete);
@@ -48,6 +50,18 @@ deleteListButton.addEventListener('click', () => {
     lists = lists.filter(list => list.id !== selectedListId)
     selectedListId = null;
     saveAndRender();
+})
+
+deleteTaskButton.addEventListener('click', () => {
+    task = tasks.filter(task => task.id !== selectedTaskId)
+    selectedTaskId = null;
+    saveAndRender();
+})
+
+editTaskButton.addEventListener('click', (value) => {
+    const selectedList = lists.find(list => list.id === selectedListId);
+    selectedList.tasks = selectedList.tasks(value);
+    saveAndRender()
 })
 
 newListForm.addEventListener('submit', e => {
@@ -116,8 +130,12 @@ function renderTasks(selectedList) {
     selectedList.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate.content, true);
         const checkbox = taskElement.querySelector("input");
+        // const deleteButton = taskElement.querySelector('deleteTaskButton');
+        // const editButton = taskElement.querySelector('editTaskButton');
         checkbox.id = task.id;
         checkbox.checked = task.complete;
+        // deleteButton.id = task.id;
+        // editButton.id = task.id;
         const label = taskElement.querySelector("label");
         label.htmlFor = task.id;
         label.append(task.name);
@@ -159,5 +177,6 @@ function clearElement(element) {
 // changeTheme(1);
 render();
 
-
 //add delete task button
+//add option to rename tasks
+//add option to rename name of task list

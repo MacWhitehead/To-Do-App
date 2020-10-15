@@ -28,6 +28,9 @@
                         <input type="text" class="new list" data-new-list-input placeholder="new list name"
                             aria-label="new list name" />
                     </form>
+                    <button class="btn delete" data-delete-list-button>
+                        Delete List
+                    </button>
                 </div>
             </div>
             <div class="col border tasks-in-list">
@@ -50,9 +53,6 @@
                         <button class="btn delete" data-clear-complete-tasks-button>
                             Clear Completed Tasks
                         </button>
-                        <button class="btn delete" data-delete-list-button>
-                            Delete List
-                        </button>
                     </div>
                 </div>
             </div>
@@ -64,6 +64,8 @@
             <input type="checkbox">
             <label></label>
             <span class="custom-checkbox"></span>
+            <button id="editTaskButton" class="btn" data-edit-task>edit task</button>
+            <button id="deleteTaskButton" class="btn" data-delete-task>remove task</button>
         </div>
     </template>
 
