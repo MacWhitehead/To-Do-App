@@ -76,6 +76,19 @@ newListForm.addEventListener('submit', e => {
     saveAndRender();
 })
 
+//edit list name on double click. 
+newListForm.addEventListener('dblclick', e => {
+    e.preventDefault();
+    const listName = newListInput.value
+    if (listName == null || listName === '') {
+        return
+    }
+    const list = createList(listName)
+    newListInput.value = null;
+    lists.push(list);
+    saveAndRender();
+})
+
 newTaskForm.addEventListener('submit', e => {
     e.preventDefault();
     const taskName = newTaskInput.value
@@ -130,12 +143,12 @@ function renderTasks(selectedList) {
     selectedList.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate.content, true);
         const checkbox = taskElement.querySelector("input");
-        // const deleteButton = taskElement.querySelector('deleteTaskButton');
-        // const editButton = taskElement.querySelector('editTaskButton');
+        const deleteButton = taskElement.querySelector('deleteTaskButton');
+        const editButton = taskElement.querySelector('editTaskButton');
         checkbox.id = task.id;
         checkbox.checked = task.complete;
-        // deleteButton.id = task.id;
-        // editButton.id = task.id;
+        deleteButton.id = task.id;
+        editButton.id = task.id;
         const label = taskElement.querySelector("label");
         label.htmlFor = task.id;
         label.append(task.name);
@@ -176,7 +189,3 @@ function clearElement(element) {
 // }
 // changeTheme(1);
 render();
-
-//add delete task button
-//add option to rename tasks
-//add option to rename name of task list
