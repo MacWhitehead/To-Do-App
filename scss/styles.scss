@@ -61,147 +61,144 @@ body {
     opacity: 0.7;
 }
 
-// .btn-delete {
-//     opacity: 0.7;
-//     font-size: 1rem;
-//     transition: color 200ms;
-// }
-// .btn-delete:hover {
-//     color: var(--color-dark-orange);
-// }
-// .new {
-//     background: transparent;
-//     border: 0;
-//     color: inherit;
-//     border-bottom: 1px solid currentColor;
-//     font-size: inherit;
-//     outline: none;
-//     transition: border-bottom 150ms ease-in;
-//     order: 2;
-//     padding: 0.25em;
-// }
-// .new::placeholder {
-//     opacity: 0.4;
-// }
-// .new:focus {
-//     border-bottom-width: 3px;
-// }
-// .new:focus::placeholder {
-//     opacity: 0.15;
-// }
-// .new.list {
-//     font-size: 1.1rem;
-// }
-// .new.task {
-//     margin-bottom: 0;
-// }
+.btn-delete {
+    opacity: 0.7;
+    font-size: 1rem;
+    transition: color 200ms;
+}
+.btn-delete:hover {
+    color: var(--color-dark-orange);
+}
+.new {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid currentColor;
+    font-size: inherit;
+    outline: none;
+    transition: border-bottom 150ms ease-in;
+    order: 2;
+    padding: 0.25em;
+}
+.new::placeholder {
+    opacity: 0.4;
+}
+.new:focus {
+    border-bottom-width: 3px;
+}
+.new:focus::placeholder {
+    opacity: 0.15;
+}
+.new.list {
+    font-size: 1.1rem;
+}
+.new.task {
+    margin-bottom: 0;
+}
 
-// .active-list {
-//     font-weight: 700;
-// }
-// .todo-list {
-//     --spacer: 2rem;
+.active-list {
+    font-weight: 700;
+}
+.todo-list {
+    --spacer: 2rem;
 
-//     grid-area: active;
-//     background: var(--color-black);
-//     color: var(--color-light-orange);
-// }
-// .todo-header {
-//     padding: var(--spacer);
-//     background: #e4e4e4;
-//     align-items: center;
-//     justify-content: space-between;
-// }
-// .list-title {
-//     margin-right: 0 1em 0 0;
-//     margin: 0;
-// }
-// .task-count {
-//     margin: 0;
-//     font-size: 1rem;
-// }
-// .todo-body {
-//     padding: var(--spacer);
-//     position: relative;
-// }
+    background: var(--color-dark-orange);
+    color: var(--color-black);
+}
+.todo-header {
+    padding: var(--spacer);
+    align-items: center;
+    justify-content: space-between;
+}
+.list-title {
+    margin-right: 0 1em 0 0;
+    margin: 0;
+}
+.task-count {
+    margin: 0;
+    font-size: 1rem;
+}
+.todo-body {
+    padding: var(--spacer);
+    position: relative;
+}
 
-// .new-task-creator .create {
-//     color: var(--color-purple);
-// }
+.new-task-creator .create {
+    color: var(--color-purple);
+}
 
-// [type='checkbox'] {
-//     opacity: 0;
-//     position: absolute;
-// }
-// .task label {
-//     display: inline-flex;
-//     align-items: center;
-//     position: relative;
-//     margin-bottom: 1.25em;
-// }
-// .task {
-//     position: relative;
-// }
-// .task::after {
-//     content: '';
-//     position: absolute;
-//     right: 0;
-//     left: 0;
-//     height: 1px;
-//     bottom: -.5em;
-//     background: currentColor;
-//     opacity: 0.1;
-// }
-// .custom-checkbox {
-//     --size: 0.75em;
-//     display: inline-block;
-//     width: var(--size);
-//     height:var(--size);
-//     margin-right: var(--size);
-//     cursor: pointer;
-//     border: 2px solid currentColor;
-//     border-radius: 50%;
-//     transform: scale(1);
-//     transition: transform 200ms ease-in-out;
-// }
+[type='checkbox'] {
+    opacity: 0;
+    position: absolute;
+}
+.task input {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 1.25em;
+}
+.task {
+    position: relative;
+}
+.task::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 1px;
+    bottom: -.5em;
+    background: currentColor;
+    opacity: 0.1;
+}
+.custom-checkbox {
+    --size: 0.75em;
+    display: inline-block;
+    width: var(--size);
+    height:var(--size);
+    margin-right: var(--size);
+    cursor: pointer;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: transform 200ms ease-in-out;
+}
 
 
-// .task:hover .custom-checkbox, [type='checkbox']:focus + label .custom-checkbox{
-//     transition: scale(1.2);
-//     color: var(--color-purple);
-// }
+.task:hover .custom-checkbox, [type='checkbox']:focus + label .custom-checkbox{
+    transition: scale(1.2);
+    color: var(--color-purple);
+}
 
-// [type='checkbox']:checked + label .custom-checkbox {
-//     background: var(--color-purple);
-//     border-color: var(--color-purple);
-//     box-shadow: inset 0 0 0px 3px whitesmoke;
-// }
+[type='checkbox']:checked + label .custom-checkbox {
+    background: var(--color-purple);
+    border-color: var(--color-purple);
+    box-shadow: inset 0 0 0px 3px whitesmoke;
+}
 
-// [type='checkbox']:checked + label {
-//     opacity: 0.5;
-// }
-// .task label::after {
-//     content: '';
-//     position: absolute;
-//     left: 1.5em;
-//     right: 0;
-//     top: calc(50% - 1.5px);
-//     height: 3px;
-//     background: currentColor;
-//     transform: scaleX(0);
-//     transform-origin: right;
-//     transition: transform 0ms ease-in-out;
-// }
-// [type='checkbox']:checked + label::after {
-//     transform: scaleX(1);
-//     transform-origin: left;
-// }
-// .delete-stuff {
-//     justify-content: space-evenly;
-//     position: absolute;
-//     width: 100%;
-//     left: 0;
-//     bottom: -35px;
-//     color: var(--color-black);
-// }
+[type='checkbox']:checked + label {
+    opacity: 0.5;
+}
+.task label::after {
+    content: '';
+    position: absolute;
+    left: 1.5em;
+    right: 0;
+    top: calc(50% - 1.5px);
+    height: 3px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0ms ease-in-out;
+}
+[type='checkbox']:checked + label::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+.delete-stuff {
+    justify-content: space-evenly;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -35px;
+    color: var(--color-black);
+}
 

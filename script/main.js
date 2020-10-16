@@ -12,8 +12,6 @@ const taskTemplate = document.getElementById("task-template")
 const newTaskForm = document.querySelector("[data-new-task-form]");
 const newTaskInput = document.querySelector("[data-new-task-input]");
 const clearCompleteTasksButton = document.querySelector("[data-clear-complete-tasks-button]")
-const deleteTaskButton = document.querySelector("[data-delete-task]")
-const editTaskButton = document.querySelector("[data-edit-task]")
 
 const LOCAL_STORAGE_LIST_KEY = 'task.lists';
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId';
@@ -52,17 +50,24 @@ deleteListButton.addEventListener('click', () => {
     saveAndRender();
 })
 
-deleteTaskButton.addEventListener('click', () => {
-    task = tasks.filter(task => task.id !== selectedTaskId)
-    selectedTaskId = null;
-    saveAndRender();
-})
+function enableEditOrDeleteButtons() {
+    const deleteTaskButton = document.querySelector("[data-delete-task]")
+    const editTaskButton = document.querySelector("[data-edit-task]")
+    deleteTaskButton.addEventListener('click', () => {
+        const selectedList = lists.find(list => list.id === selectedListId);
+        selectedList.tasks = selectedList.tasks.filter(task => task.id !== deleteTaskButton.id)
+        saveAndRender();
+    })
+    
+    editTaskButton.addEventListener('onkeyup', (value) => {
+        const selectedList = lists.find(list => list.id === selectedListId);
+        selectedList.tasks = selectedList.tasks.localStorage(value);
+        saveAndRender();
+    })
+}
 
-editTaskButton.addEventListener('click', (value) => {
-    const selectedList = lists.find(list => list.id === selectedListId);
-    selectedList.tasks = selectedList.tasks(value);
-    saveAndRender()
-})
+//on key up, save to local storage with event listener
+//change to input option and style with no border and with dark orange
 
 newListForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -143,16 +148,15 @@ function renderTasks(selectedList) {
     selectedList.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate.content, true);
         const checkbox = taskElement.querySelector("input");
-        const deleteButton = taskElement.querySelector('deleteTaskButton');
-        const editButton = taskElement.querySelector('editTaskButton');
+        const deleteButton = taskElement.querySelector('[data-delete-task]');
         checkbox.id = task.id;
         checkbox.checked = task.complete;
         deleteButton.id = task.id;
-        editButton.id = task.id;
-        const label = taskElement.querySelector("label");
-        label.htmlFor = task.id;
-        label.append(task.name);
+        const taskInput = taskElement.querySelector("input");
+        taskInput.htmlFor = task.id;
+        taskInput.append(task.name);
         tasksContainer.appendChild(taskElement);
+        enableEditOrDeleteButtons();
     })
 }
 
