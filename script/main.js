@@ -28,10 +28,24 @@ listContainer.addEventListener('click', e => {
 
 //checks the list item off and sets to completed
 tasksContainer.addEventListener('click', e => {
-    if (e.target.tagName.toLowerCase() === 'input') {
+    if (e.target.tagName.toLowerCase() === 'input' && e.target.type === 'checkbox') {
         const selectedList = lists.find(list => list.id === selectedListId);
         const selectedTask = selectedList.tasks.find(task => task.id === e.target.id)
+        console.log(selectedList, selectedTask)
         selectedTask.complete = e.target.checked;
+        const selector = `.a${e.target.id}`;
+        console.log(e.target.id, selector);
+        console.log(typeof selector === 'string')
+        console.log(e.target.checked)
+        const inputEditElement = document.querySelector(selector, 'input');
+        if (e.target.checked) {
+            //add class to input that crosses out text
+            inputEditElement.classList.add('crossOutText');
+        }
+        else {
+            //removes class that crosses out text on click
+            inputEditElement.classList.remove('crossOutText')
+        }
         save();
         renderTaskCount(selectedList);
     }
@@ -82,17 +96,16 @@ newListForm.addEventListener('submit', e => {
 })
 
 //edit list name on double click. 
-newListForm.addEventListener('dblclick', e => {
-    e.preventDefault();
-    const listName = newListInput.value
-    if (listName == null || listName === '') {
-        return
-    }
-    const list = createList(listName)
-    newListInput.value = null;
-    lists.push(list);
-    saveAndRender();
-})
+// newListForm.addEventListener('dblclick', e => {
+//     const listName = newListInput.value
+//     if (listName == null || listName === '') {
+//         return
+//     }
+//     const list = createList(listName)
+//     newListInput.value = null;
+//     lists.push(list);
+//     saveAndRender();
+// })
 
 newTaskForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -155,6 +168,7 @@ function renderTasks(selectedList) {
         const taskInput = taskElement.querySelector("[data-edit-task]");
         taskInput.id = task.id;
         taskInput.value = task.name;
+        taskInput.classList.add(`a${task.id}`)
         tasksContainer.appendChild(taskElement);
         enableEditOrDeleteButtons();
     })

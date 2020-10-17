@@ -17,6 +17,10 @@ body {
   font-size: 2rem;
 }
 
+.crossOutText {
+  text-decoration: line-through;
+}
+
 .title {
   text-align: center;
   font-size: 5rem;
@@ -102,7 +106,7 @@ body {
 }
 
 .new.list {
-  font-size: 1.1rem;
+  font-size: 0.75rem;
 }
 
 .new.task {
@@ -145,7 +149,7 @@ body {
 }
 
 [type=checkbox] {
-  opacity: 0;
+  opacity: 1;
   position: absolute;
 }
 
