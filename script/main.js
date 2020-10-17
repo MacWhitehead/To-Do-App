@@ -147,14 +147,14 @@ function render() {
 function renderTasks(selectedList) {
     selectedList.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate.content, true);
-        const checkbox = taskElement.querySelector("input");
+        const checkbox = taskElement.querySelector("[data-checkbox]");
         const deleteButton = taskElement.querySelector('[data-delete-task]');
         checkbox.id = task.id;
         checkbox.checked = task.complete;
         deleteButton.id = task.id;
-        const taskInput = taskElement.querySelector("input");
-        taskInput.htmlFor = task.id;
-        taskInput.append(task.name);
+        const taskInput = taskElement.querySelector("[data-edit-task]");
+        taskInput.id = task.id;
+        taskInput.value = task.name;
         tasksContainer.appendChild(taskElement);
         enableEditOrDeleteButtons();
     })
