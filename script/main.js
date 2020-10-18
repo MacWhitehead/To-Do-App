@@ -30,13 +30,10 @@ listContainer.addEventListener('click', e => {
 tasksContainer.addEventListener('click', e => {
     if (e.target.tagName.toLowerCase() === 'input' && e.target.type === 'checkbox') {
         const selectedList = lists.find(list => list.id === selectedListId);
-        const selectedTask = selectedList.tasks.find(task => task.id === e.target.id)
-        console.log(selectedList, selectedTask)
+        const targetId = e.target.id.split('-')[1];
+        const selectedTask = selectedList.tasks.find(task => task.id === targetId);
         selectedTask.complete = e.target.checked;
-        const selector = `.a${e.target.id}`;
-        console.log(e.target.id, selector);
-        console.log(typeof selector === 'string')
-        console.log(e.target.checked)
+        const selector = `.a${targetId}`;
         const inputEditElement = document.querySelector(selector, 'input');
         if (e.target.checked) {
             //add class to input that crosses out text
@@ -64,24 +61,20 @@ deleteListButton.addEventListener('click', () => {
     saveAndRender();
 })
 
-function enableEditOrDeleteButtons() {
-    const deleteTaskButton = document.querySelector("[data-delete-task]")
-    const editTaskButton = document.querySelector("[data-edit-task]")
+function enableEditOrDeleteButtons(taskId) {
+    const deleteTaskButton = document.getElementById('delete-' + taskId);
+    // const editTaskButton = document.querySelector("[data-edit-task]")
     deleteTaskButton.addEventListener('click', () => {
         const selectedList = lists.find(list => list.id === selectedListId);
-        selectedList.tasks = selectedList.tasks.filter(task => task.id !== deleteTaskButton.id)
+        selectedList.tasks = selectedList.tasks.filter(task => task.id !== taskId)
         saveAndRender();
     })
-    
-    editTaskButton.addEventListener('onkeyup', (value) => {
-        const selectedList = lists.find(list => list.id === selectedListId);
-        selectedList.tasks = selectedList.tasks.localStorage(value);
-        saveAndRender();
-    })
+    // editTaskButton.addEventListener('onkeyup', (value) => {
+    //     const selectedList = lists.find(list => list.id === selectedListId);
+    //     selectedList.tasks = selectedList.tasks.localStorage(value);
+    //     saveAndRender();
+    // })
 }
-
-//on key up, save to local storage with event listener
-//change to input option and style with no border and with dark orange
 
 newListForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -95,18 +88,6 @@ newListForm.addEventListener('submit', e => {
     saveAndRender();
 })
 
-//edit list name on double click. 
-// newListForm.addEventListener('dblclick', e => {
-//     const listName = newListInput.value
-//     if (listName == null || listName === '') {
-//         return
-//     }
-//     const list = createList(listName)
-//     newListInput.value = null;
-//     lists.push(list);
-//     saveAndRender();
-// })
-
 newTaskForm.addEventListener('submit', e => {
     e.preventDefault();
     const taskName = newTaskInput.value
@@ -116,8 +97,6 @@ newTaskForm.addEventListener('submit', e => {
     const task = createTask(taskName)
     newTaskInput.value = null;
     const selectedList = lists.find(list => list.id === selectedListId);
-    console.log(selectedList);
-    console.log(lists)
     selectedList.tasks.push(task);
     saveAndRender();
 })
@@ -162,15 +141,15 @@ function renderTasks(selectedList) {
         const taskElement = document.importNode(taskTemplate.content, true);
         const checkbox = taskElement.querySelector("[data-checkbox]");
         const deleteButton = taskElement.querySelector('[data-delete-task]');
-        checkbox.id = task.id;
+        checkbox.id = 'checkbox-' + task.id;
         checkbox.checked = task.complete;
-        deleteButton.id = task.id;
+        deleteButton.id = 'delete-' + task.id;
         const taskInput = taskElement.querySelector("[data-edit-task]");
         taskInput.id = task.id;
         taskInput.value = task.name;
-        taskInput.classList.add(`a${task.id}`)
+        taskInput.classList.add(`a${task.id}`);
         tasksContainer.appendChild(taskElement);
-        enableEditOrDeleteButtons();
+        enableEditOrDeleteButtons(task.id);
     })
 }
 
@@ -182,12 +161,12 @@ function renderTaskCount(selectedList) {
 
 function renderLists() {
     lists.forEach(list => {
-        const listElement = document.createElement('li')
+        const listElement = document.createElement('li');
         listElement.dataset.listId = list.id
-        listElement.classList.add('list-name')
+        listElement.classList.add('list-name');
         listElement.innerText = list.name;
         if (list.id === selectedListId) {
-            listElement.classList.add('active.list')
+            listElement.classList.add('active-list')
         }
         listContainer.appendChild(listElement)
     })
@@ -199,11 +178,4 @@ function clearElement(element) {
         element.removeChild(element.firstChild)
     }
 }
-
-// function changeTheme(themeId) {
-//     var link = document.querySelector("[theme]");
-//     link.href = `css/theme-${themeId}.css`;
-//     console.log(link.href);
-// }
-// changeTheme(1);
 render();

@@ -1,10 +1,13 @@
 :root {
   --color-light-orange: #F49968;
   --color-dark-orange: #F67632;
+  --color-med-orange: #ED8D59;
   --color-purple: #4A314D;
   --color-grey: #808080;
   --color-green: #20BF55;
+  --color-lime-green: #0DF259;
   --color-black: #000;
+  --color-red: #AF1F1F;
 }
 
 body {
@@ -15,10 +18,30 @@ body {
   justify-content: center;
   font-family: "Sansita Swashed", cursive;
   font-size: 2rem;
+  border: none;
+}
+
+.checkbox {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+.input:checked ~ .checkbox {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: var(--color-purple);
 }
 
 .crossOutText {
   text-decoration: line-through;
+  color: var(--color-purple);
 }
 
 .title {
@@ -46,22 +69,31 @@ body {
 .btn {
   background-color: var(--color-green);
   border: 1px solid black;
-  padding: 5px;
+  padding: 0px 5px;
   font-family: "Amatic SC", cursive;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  transition: background-color 250ms ease-in;
 }
 
-.btn::hover {
-  opacity: 0.7;
-  transition: opacity 250ms ease-in;
+.btn:hover {
+  background-color: var(--color-lime-green);
   cursor: pointer;
+}
+
+.task-list-title {
+  font-size: 2.5rem;
 }
 
 .task-list {
   line-height: 1.7;
-  font-size: 1.2rem;
-  list-style: circle;
+  list-style: square;
   padding-left: 1.1em;
+}
+
+.task-list, .task, .new {
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .list-name {
@@ -78,10 +110,6 @@ body {
   transition: color 200ms;
 }
 
-.btn-delete:hover {
-  color: var(--color-dark-orange);
-}
-
 .new {
   background: transparent;
   border: 0;
@@ -94,7 +122,7 @@ body {
 }
 
 .new::placeholder {
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 .new:focus {
@@ -106,30 +134,33 @@ body {
 }
 
 .new.list {
-  font-size: 0.75rem;
+  font-size: 1.25rem;
 }
 
 .new.task {
   margin-bottom: 0;
+  font-size: 1.25rem;
 }
 
 .active-list {
-  font-weight: 700;
+  text-decoration: underline;
+  color: var(--color-purple);
 }
 
 .todo-list {
-  --spacer: 2rem;
+  --spacer: 1rem;
   background: var(--color-dark-orange);
   color: var(--color-black);
 }
 
 .todo-header {
-  padding: var(--spacer);
+  padding: 5px;
   align-items: center;
   justify-content: space-between;
 }
 
 .list-title {
+  color: var(--color-purple);
   margin-right: 0 1em 0 0;
   margin: 0;
 }
@@ -140,85 +171,21 @@ body {
 }
 
 .todo-body {
-  padding: var(--spacer);
+  padding: 0px 5px;
   position: relative;
-}
-
-.new-task-creator .create {
-  color: var(--color-purple);
-}
-
-[type=checkbox] {
-  opacity: 1;
-  position: absolute;
 }
 
 .task input {
+  background-color: var(--color-med-orange);
   display: inline-flex;
   align-items: center;
-  position: relative;
-  margin-bottom: 1.25em;
+  margin-bottom: 0.35em;
+  border: none;
 }
 
 .task {
   position: relative;
-}
-
-.task::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  left: 0;
-  height: 1px;
-  bottom: -0.5em;
-  background: currentColor;
-  opacity: 0.1;
-}
-
-.custom-checkbox {
-  --size: 0.75em;
-  display: inline-block;
-  width: var(--size);
-  height: var(--size);
-  margin-right: var(--size);
-  cursor: pointer;
-  border: 2px solid currentColor;
-  border-radius: 50%;
-  transform: scale(1);
-  transition: transform 200ms ease-in-out;
-}
-
-.task:hover .custom-checkbox, [type=checkbox]:focus + label .custom-checkbox {
-  transition: scale(1.2);
-  color: var(--color-purple);
-}
-
-[type=checkbox]:checked + label .custom-checkbox {
-  background: var(--color-purple);
-  border-color: var(--color-purple);
-  box-shadow: inset 0 0 0px 3px whitesmoke;
-}
-
-[type=checkbox]:checked + label {
-  opacity: 0.5;
-}
-
-.task label::after {
-  content: "";
-  position: absolute;
-  left: 1.5em;
-  right: 0;
-  top: calc(50% - 1.5px);
-  height: 3px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0ms ease-in-out;
-}
-
-[type=checkbox]:checked + label::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  font-size: 1.25rem;
 }
 
 .delete-stuff {
